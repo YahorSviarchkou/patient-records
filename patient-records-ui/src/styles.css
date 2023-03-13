@@ -1,0 +1,96 @@
+@font-face {
+  font-family: Motserrat-Light;
+  src: url("../fonts/Montserrat-Light.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 300;
+}
+@font-face {
+  font-family: Montserrat-Medium;
+  src: url("../fonts/Montserrat-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url("../fonts/Montserrat-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url("../fonts/Montserrat-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+}
+body {
+  margin: 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: Montserrat-Bold;
+}
+
+table {
+  border-collapse: collapse;
+  border-radius: 5px;
+  width: 100%;
+}
+table th {
+  font-family: Montserrat-Medium;
+  border-bottom: 1px solid;
+}
+table td {
+  font-family: Montserrat-Regular;
+}
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+table tr:hover {
+  background-color: #ddd;
+}
+table tr:active {
+  background-color: #c2dab8;
+}
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+label, p {
+  margin: 5px;
+  font-family: Montserrat-Regular;
+  font-size: 15px;
+}
+
+input {
+  margin: 5px;
+  padding: 5px;
+  border: 0 solid;
+  border-radius: 5px;
+  font-family: Montserrat-Medium;
+  font-size: 18px;
+}
+
+button {
+  margin: 5px;
+  padding: 5px;
+  border: 0 solid;
+  border-radius: 5px;
+  font-family: Montserrat-Medium;
+  font-size: 15px;
+}
+button:hover {
+  background-color: #c6ecca;
+}
+button:active {
+  background-color: #7ba980;
+}
+
+/*# sourceMappingURL=styles.css.map */

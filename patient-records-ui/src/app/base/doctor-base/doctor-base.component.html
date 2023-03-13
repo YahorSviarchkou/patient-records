@@ -1,0 +1,21 @@
+<table>
+  <tr>
+    <th>id</th>
+    <th>Логин</th>
+    <th>Роль</th>
+    <th>ФИО</th>
+    <th>Должность</th>
+  </tr>
+  <tr *ngFor="let doctor of doctorsPage" (click)="toProfile(doctor)">
+    <td>{{doctor.id}}</td>
+    <td>{{doctor.user.login}}</td>
+    <td>{{doctor.user.role.title}}</td>
+    <td>{{doctor.fio}}</td>
+    <td>{{doctor.position.title}}</td>
+  </tr>
+</table>
+<div class="pages">
+  <button (click)="openPrevPage()">Назад</button>
+  <button (click)="openNextPage()">Вперёд</button>
+</div>
+

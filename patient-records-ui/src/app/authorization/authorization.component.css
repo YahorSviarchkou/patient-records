@@ -1,0 +1,28 @@
+.dialog {
+  width: 400px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(../../assets/images/green-background.jpg) no-repeat;
+  background-size: cover;
+}
+
+.content {
+  margin: 0 10px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+.content__header {
+  font-size: 30px;
+}
+.content__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/*# sourceMappingURL=authorization.component.css.map */

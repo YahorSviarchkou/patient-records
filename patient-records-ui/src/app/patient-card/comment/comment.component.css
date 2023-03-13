@@ -1,0 +1,75 @@
+.comment {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.comment__info {
+  border: 1px solid;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+.comment__content {
+  border: 1px solid;
+  border-top: 0;
+  border-radius: 0 0 5px 5px;
+  height: 10vh;
+  overflow-wrap: break-word;
+  overflow: auto;
+}
+
+.popup__bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(153, 197, 149, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup__bg.active {
+  opacity: 1;
+  pointer-events: all;
+  transition: 0.5s all;
+}
+
+.popUp {
+  background-color: #ffffff;
+  color: black;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  width: 400px;
+}
+
+.pop__block {
+  display: flex;
+  flex-direction: column;
+  height: 35vh;
+}
+.pop__block h3 {
+  margin: 10px 10px;
+}
+.pop__block form {
+  margin: 10px 10px;
+  display: flex;
+  flex-direction: column;
+}
+.pop__block form textarea {
+  width: 97%;
+  height: 150px;
+  resize: none;
+}
+.pop__block form button {
+  width: 50%;
+  margin: 15px 0;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+/*# sourceMappingURL=comment.component.css.map */

@@ -1,0 +1,523 @@
+openapi: 3.0.3
+info:
+  title: PatientRecords
+  description: This is a patient record keeping application
+  version: 1.0.0
+tags:
+  - name: users
+    description: users documentation
+  - name: doctor-details
+    description: doctor-details documentation
+  - name: patient-cards
+    description: patient-cards documentation
+  - name: comments
+    description: comments documentation
+paths:
+  /patient-cards:
+    get:
+      operationId: getAllPatientCards
+      tags:
+        - patient-cards
+      summary: Get all Patient card
+      description: Get all Patient card
+      parameters:
+        - in: query
+          name: FIO
+          schema:
+            type: string
+          description: Get Patient card by FIO
+        - in: query
+          name: minBirthday
+          schema:
+            type: string
+            pattern: ^|(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$
+          description: Get Patient card by min date of birthday
+        - in: query
+          name: maxBirthday
+          schema:
+            type: string
+            pattern: ^|(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$
+          description: Get Patient card by max date of birthday
+        - in: query
+          name: minCreation
+          schema:
+            type: string
+            pattern: ^|(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$
+          description: Get Patient card by min date of creation
+        - in: query
+          name: maxCreation
+          schema:
+            type: string
+            pattern: ^|(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$
+          description: Get Patient card by max date of creation
+      responses:
+        '200':
+          description: Patient cards founded successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PatientCard'
+    post:
+      operationId: createPatientCard
+      tags:
+        - patient-cards
+      summary: Create patient card
+      description: Create patient card
+      requestBody:
+        description: Patient card object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientCard'
+        required: true
+      responses:
+        '200':
+          description: Patient card created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientCard'
+    put:
+      operationId: updatePatientCard
+      tags:
+        - patient-cards
+      summary: Update patient card
+      description: Update patient card
+      requestBody:
+        description: Patient card object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientCard'
+        required: true
+      responses:
+        '200':
+          description: Patient card updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientCard'
+  /patient-cards/{patientId}:
+    get:
+      operationId: getPatientCardById
+      tags:
+        - patient-cards
+      summary: Get a patient card
+      description: Get a patient cards by id
+      parameters:
+        - name: patientId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Patient card founded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientCard'
+        '404':
+          description: Patient card not found
+    delete:
+      operationId: softDeleteById
+      tags:
+        - patient-cards
+      summary: Delete a patient card
+      description: Delete a patient cards by id
+      parameters:
+        - name: patientId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Patient card deleted successfully
+        '404':
+          description: Patient card not found
+  /patient-cards/{patientId}/{userId}/comments:
+    post:
+      operationId: addCommentToPatientCard
+      tags:
+        - patient-cards
+      summary: Add comment to patient card by patientId
+      description: Create and add comment to patient card by patientId
+      parameters:
+        - name: patientId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Comment object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+        required: true
+      responses:
+        '200':
+          description: Patient card founded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientCard'
+        '404':
+          description: Patient card not found
+  /doctor-details:
+    get:
+      operationId: getAllDoctorsDetails
+      tags:
+        - doctor-details
+      summary: Get all Doctors details
+      description: Get all Doctors details
+      responses:
+        '200':
+          description: Doctors details founded successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DoctorDetails'
+    post:
+      operationId: createDoctorDetails
+      tags:
+        - doctor-details
+      summary: Create doctor details
+      description: Create doctor details
+      requestBody:
+        description: Doctor details object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoctorDetailsRequest'
+        required: true
+      responses:
+        '200':
+          description: Doctor details created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorDetails'
+    put:
+      operationId: updateDoctorDetails
+      tags:
+        - doctor-details
+      summary: Update doctor details
+      description: Update doctor details
+      requestBody:
+        description: Doctor details object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoctorDetails'
+        required: true
+      responses:
+        '200':
+          description: Doctor details updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorDetails'
+  /doctor-details/{doctorId}:
+    get:
+      operationId: getDoctorDetailsById
+      tags:
+        - doctor-details
+      summary: Get a doctor details
+      description: Get a doctor details by id, also you can use userID
+      parameters:
+        - name: doctorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Doctor details founded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorDetails'
+        '404':
+          description: Doctor details not found
+  /users:
+    get:
+      operationId: getUsersByFilter
+      tags:
+        - users
+      summary: Get user
+      description: Get user by filter
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+            format: int64
+          description: Get user by id
+        - in: query
+          name: login
+          schema:
+            type: string
+          description: Get user by login
+      responses:
+        '200':
+          description: User founded successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+  /users/{userId}:
+    put:
+      operationId: changeUserPassword
+      tags:
+        - users
+      summary: Change user password
+      description: Change user password by id
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Doctor details object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeUserPasswordRequest'
+        required: true
+      responses:
+        '200':
+          description: User password updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        '404':
+          description: User not found
+    delete:
+      operationId: softDeleteUserById
+      tags:
+        - users
+      summary: Delete user
+      description: Delete user by id
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: User deleted successfully
+        '404':
+          description: User not found
+  /comments/{patientId}:
+    get:
+      operationId: getCommentsByPatientId
+      tags:
+        - comments
+      summary: Get comments
+      description: Get comments by patient id
+      parameters:
+        - name: patientId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Comments founded successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '404':
+          description: Comments not found
+  /comments/{patientId}/{userId}:
+    get:
+      operationId: getCommentsByPatientIdAndDoctorId
+      tags:
+        - comments
+      summary: Get comments
+      description: Get comments by patient id and doctor.user id
+      parameters:
+        - name: patientId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Comments founded successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '404':
+          description: Comments not found
+components:
+  schemas:
+    DoctorDetailsRequest:
+      description: This is the Doctor details model
+      type: object
+      properties:
+        fio:
+          type: string
+          example: FIO example
+        position:
+          type: string
+          example: position title example
+        login:
+          type: string
+          example: login example
+        password:
+          type: string
+          example: password example
+        roleTitle:
+          type: string
+          example: role name example
+
+    ChangeUserPasswordRequest:
+      description: This is the ChangeUserPasswordRequest model
+      type: object
+      properties:
+        oldPassword:
+          type: string
+          example: User old password example
+        newPassword:
+          type: string
+          example: User new password example
+
+    Role:
+      description: This is the Role model
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1000
+        title:
+          type: string
+          example: Role title example
+
+    User:
+      description: This is the User model
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1000
+        login:
+          type: string
+          example: User login example
+        role:
+          $ref: '#/components/schemas/Role'
+
+    Position:
+      description: This is the Position model
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1000
+        title:
+          type: string
+          example: Position title example
+
+    DoctorDetails:
+      description: This is the Doctor details model
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1000
+        fio:
+          type: string
+          example: FIO example
+        position:
+          $ref: '#/components/schemas/Position'
+        user:
+          $ref: '#/components/schemas/User'
+
+    PatientCard:
+      description: This is the Patient card model
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1000
+        fio:
+          type: string
+          example: FIO example
+        age:
+          type: integer
+          format: int32
+          example: 18
+        dateOfBirthday:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time
+
+    Comment:
+      description: This is the Comment model
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1000
+        content:
+          type: string
+          example: Comment content example
+        created:
+          type: string
+          format: date-time
+        doctorDetails:
+          $ref: '#/components/schemas/DoctorDetails'
+
+    Message:
+      description: This is model for send messages
+      type: object
+      properties:
+        value:
+          type: string

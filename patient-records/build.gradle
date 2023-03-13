@@ -1,0 +1,72 @@
+plugins {
+    id 'idea'
+    id 'java'
+    id 'org.springframework.boot' version '2.7.5'
+    id 'io.spring.dependency-management' version "1.0.12.RELEASE"
+    id "org.openapi.generator" version "6.2.1"
+}
+
+group 'com.patient.records'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    compileOnly "org.openapitools:jackson-databind-nullable:0.2.1"
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.0.2'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'org.postgresql:postgresql:42.5.1'
+    implementation 'org.flywaydb:flyway-core:9.10.1'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
+    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'commons-io:commons-io:2.11.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+openApiGenerate {
+    generatorName = "spring"
+    inputSpec = "$rootDir/src/main/resources/docs/openapi.yaml".toString()
+    outputDir = "$buildDir/generated/sources".toString()
+    apiPackage = "com.patient.records.openapi.api"
+    modelNameSuffix = "Dto"
+    generateApiTests = false
+    generateModelTests = false
+    modelPackage = "com.patient.records.openapi.dto"
+    configOptions = [
+            sourceFolder        : "openapi/java/main",
+            dateLibrary         : 'java17',
+            interfaceOnly       : 'true',
+            skipDefaultInterface: 'true',
+            useApiIgnore        : 'fales',
+            swaggerAnnotations  : 'true',
+    ]
+    globalProperties = [
+            modelDocs: 'false',
+            apis     : '',
+            models   : ''
+    ]
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir(files("${openApiGenerate.outputDir.get()}/openapi/java/main"))
+        }
+    }
+}

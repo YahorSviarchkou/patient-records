@@ -1,0 +1,28 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.workbench {
+  width: 30%;
+  margin-top: 10%;
+  padding: 10px;
+  border: 0 solid;
+  border-radius: 5px;
+  background-color: #66b46f;
+}
+.workbench form {
+  display: flex;
+  flex-direction: column;
+}
+
+.photo {
+  font-size: 15px;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+/*# sourceMappingURL=workbench.component.css.map */

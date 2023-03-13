@@ -1,0 +1,79 @@
+.base {
+  display: flex;
+  flex-direction: row;
+}
+
+.management {
+  width: 300px;
+  height: 100vh;
+  background: url(../../assets/images/green-background.jpg) no-repeat;
+  background-size: cover;
+}
+.management__buttons {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 10px;
+}
+
+.patient-wrapper {
+  margin-top: 20px;
+  margin-right: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.patient {
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 5px;
+  background-color: #96d2a2;
+}
+.patient__comment {
+  margin-top: 20px;
+  width: 75%;
+}
+
+.edit {
+  margin-top: 40px;
+  width: 75%;
+  border: 2px solid;
+  border-radius: 5px;
+}
+.edit form {
+  margin: 15px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.edit form button, .edit form input {
+  border: 1px solid;
+}
+.edit form h3 {
+  margin: 0;
+}
+
+.photo-frame {
+  margin: 10px;
+  width: 120px;
+  height: 150px;
+  position: relative;
+  border: 0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*# sourceMappingURL=patient-card.component.css.map */

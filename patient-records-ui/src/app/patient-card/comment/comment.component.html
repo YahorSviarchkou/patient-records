@@ -1,0 +1,31 @@
+<div class="comment-block">
+  <div *ngFor="let comment of commentsPage; let i = index" class="comment">
+    <div class="comment__info">
+      <div class="sender">
+        <p><b>Запись оставлена врачём:</b> {{comment.doctorDetails!.fio}}({{comment.doctorDetails!.position.title}})</p>
+      </div>
+      <div class="date">
+        <p><b>Дата написания:</b> {{formatDate(comment.created)}}</p>
+      </div>
+    </div>
+    <div class="comment__content">
+      <p>{{comment.content}}</p>
+    </div>
+  </div>
+  <div class="pages">
+    <button (click)="openPrevPage()">Назад</button>
+    <button (click)="openNextPage()">Вперёд</button>
+  </div>
+</div>
+
+<div class="popup__bg">
+  <div class="popUp">
+    <div class="pop__block">
+      <h3>Добавление записи:</h3>
+      <form #form="ngForm" (ngSubmit)="writeComment(form)">
+        <textarea name="comment" ngModel #comment="ngModel"></textarea>
+        <button>Добавить</button>
+      </form>
+    </div>
+  </div>
+</div>

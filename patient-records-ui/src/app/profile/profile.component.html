@@ -1,0 +1,46 @@
+<div class="base">
+  <div class="management">
+    <div class="management__buttons">
+      <button (click)="doEdit()">{{editMode ? "Отмена" : "Изменить"}}</button>
+      <button (click)="doDelete()" [disabled]="editMode">Удалить</button>
+      <button (click)="goBack()">Обратно</button>
+    </div>
+  </div>
+
+  <div class="entity">
+    <div class="entity__info">
+      <ng-template [ngIf]="type===USER">
+        <p><b>Id:</b>{{user.id}}</p>
+        <p><b>Логин:</b>{{user.login}}</p>
+        <p><b>ФИО:</b>{{user.role.title}}</p>
+      </ng-template>
+
+      <ng-template [ngIf]="type===DOCTOR">
+        <p><b>Id:</b> {{doctor.id}}</p>
+        <p><b>Логин:</b> {{doctor.user.login}}</p>
+        <p><b>Роль:</b> {{doctor.user.role.title}}</p>
+        <p><b>ФИО:</b> {{doctor.fio}}</p>
+        <p><b>Должность:</b> {{doctor.position.title}}</p>
+      </ng-template>
+    </div>
+
+    <div *ngIf="editMode"class="entity__edit">
+      <form #form="ngForm" (ngSubmit)="doSave(form)">
+        <h3>Редактирование:</h3>
+        <ng-template [ngIf]="type===DOCTOR">
+          <label for="fio">ФИО</label>
+          <input type="text" value="{{doctor.fio}}" name="fio" id="fio" ngModel #fio="ngModel">
+          <label for="position">Должность</label>
+          <input type="text" value="{{doctor.position.title}}" name="position" id="position" ngModel #position="ngModel">
+        </ng-template>
+
+        <label for="oldPassword">Старый пароль</label>
+        <input type="password" name="oldPassword" id="oldPassword" ngModel #oldPassword="ngModel">
+        <label for="oldPassword">Новый пароль</label>
+        <input type="password" name="newPassword" id="newPassword" ngModel #newPassword="ngModel">
+
+        <button>Изменить</button>
+      </form>
+    </div>
+  </div>
+</div>

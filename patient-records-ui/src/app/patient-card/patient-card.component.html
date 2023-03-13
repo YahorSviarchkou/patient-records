@@ -1,0 +1,45 @@
+<div class="base">
+  <div class="management">
+    <div class="management__buttons">
+      <ng-template [ngIf]="activeUser.role.title === 'LOCAL_ADMIN'">
+        <button (click)="switchEditMode()">{{editMode ? "Отменить" : "Редактировать"}}</button>
+        <button (click)="doDelete()" [disabled]="editMode">Удалить</button>
+      </ng-template>
+
+      <ng-template [ngIf]="activeUser.role.title !== 'LOCAL_ADMIN'">
+        <button (click)="switchWriting()">{{isWriting ? "Отменить" : "Добавить запись"}}</button>
+      </ng-template>
+
+      <button (click)="doBack()">Обратно</button>
+    </div>
+  </div>
+
+  <div class="patient-wrapper">
+    <div class="patient">
+      <div class="photo-frame">
+        <img class="photo" [src] = 'photo'/>
+      </div>
+      <div class="patient__info">
+        <p><b>ФИО:</b> {{patient.fio}}</p>
+        <p><b>Возраст:</b> {{patient.age}}</p>
+        <p><b>Дата рождения:</b> {{formatDate(patient.dateOfBirthday)}}</p>
+        <p><b>Постановка на учёт:</b> {{formatDate(patient.created)}}</p>
+      </div>
+    </div>
+    <div class="edit" *ngIf="editMode">
+      <form #form="ngForm">
+        <h3>Редактирование:</h3>
+        <label for="fio">ФИО</label>
+        <input type="text" id="fio" name="fio" ngModel #fio="ngModel">
+        <label for="birthday">Дата рождения</label>
+        <input id="birthday" type="datetime-local" name="birthday" ngModel #birthday="ngModel">
+        <label for="photo">Выберите фото</label>
+        <input id="photo" class="photo-input" (change)="assignPhoto($event)" type="file" value="Добавить фото">
+        <button (click)="doEdit(form)">Изменить</button>
+      </form>
+    </div>
+    <div class="patient__comment" *ngIf="activeUser.role.title !== 'LOCAL_ADMIN'">
+      <app-comment [patientId]="id" [(isWriting)]="isWriting"></app-comment>
+    </div>
+  </div>
+</div>

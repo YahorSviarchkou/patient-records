@@ -1,0 +1,43 @@
+<div class="content">
+  <div class="workbench">
+    <h3>Создание {{type === 'USER' ? "пользователя" : type === 'DOCTOR' ? "врача" : "пациента"}}:</h3>
+    <form #form="ngForm">
+      <ng-template [ngIf]="type === 'USER' || type === 'DOCTOR'">
+        <label for="login">Логин</label>
+        <input id="login" type="text" name="login" ngModel #login="ngModel">
+        <label for="password">Пароль</label>
+        <input id="password" type="password" name="password" ngModel #password="ngModel">
+      </ng-template>
+      <ng-template [ngIf]="type === 'DOCTOR' || type === 'PATIENT'">
+        <label for="fio">ФИО</label>
+        <input id="fio" type="text" name="fio" ngModel #fio="ngModel">
+      </ng-template>
+      <ng-template [ngIf]="type === 'DOCTOR'">
+        <label for="position">Должность</label>
+        <input id="position" type="text" name="position" ngModel #position="ngModel">
+      </ng-template>
+      <ng-template [ngIf]="type === 'PATIENT'">
+        <label for="birthday">Дата рождения</label>
+        <input id="birthday" type="datetime-local" name="birthday" ngModel #birthday="ngModel">
+      </ng-template>
+    </form>
+
+    <ng-template [ngIf]="type === 'USER' || type === 'DOCTOR'">
+      <label for="roles">Роль</label>
+      <input id="roles" type="text" list="userRoles" [(ngModel)]="selectedRole" (change)="assignRole($event)">
+      <datalist id="userRoles">
+        <option *ngFor="let role of roles" [value]="role.title">{{role.title}}</option>
+      </datalist>
+    </ng-template>
+
+    <ng-template [ngIf]="type === 'PATIENT'">
+      <label for="photo">Фотография</label>
+      <input id="photo" class="photo" (change)="assignPhoto($event)" type="file" value="Добавить фото">
+    </ng-template>
+
+    <div class="buttons">
+      <button (click)="doCreate(form)">Создать</button>
+      <button (click)="doBack()">Обратно</button>
+    </div>
+  </div>
+</div>

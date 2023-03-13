@@ -1,0 +1,14 @@
+version: "2"
+services:
+  postgres:
+    container_name: pr
+    image: postgres:15
+    ports:
+      - "5434:5432"
+    restart: always
+    environment:
+      POSTGRES_DB: "patient-records"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "admin"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data

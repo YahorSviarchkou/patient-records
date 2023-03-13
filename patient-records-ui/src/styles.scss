@@ -1,0 +1,77 @@
+@import "assets/styles/fonts";
+
+$fontBold: Montserrat-Bold;
+$fontRegular: Montserrat-Regular;
+$fontMedium: Montserrat-Medium;
+$fontLight: Montserrat-Light;
+
+body{
+  margin: 0;
+
+}
+h1, h2, h3, h4{
+  font-family: $fontBold
+}
+table {
+  border-collapse: collapse;
+  border-radius: 5px;
+  width: 100%;
+
+  th{
+    font-family: $fontMedium;
+    border-bottom: 1px solid;
+  }
+  td{
+    font-family: $fontRegular;
+  }
+  td, th{
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  tr:nth-child(even){
+    background-color: #f2f2f2;
+  }
+  tr:hover {
+    background-color: #ddd;
+  }
+  tr:active{
+    background-color: #c2dab8;
+  }
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+}
+
+label, p{
+  margin: 5px;
+  font-family: $fontRegular;
+  font-size: 15px;
+}
+input{
+  margin: 5px;
+  padding: 5px;
+  border: 0 solid;
+  border-radius: 5px;
+  font-family: $fontMedium;
+  font-size: 18px;
+}
+button{
+  margin: 5px;
+  padding: 5px;
+  border: 0 solid;
+  border-radius: 5px;
+  font-family: $fontMedium;
+  font-size: 15px;
+
+  &:hover{
+    background-color: #c6ecca;
+  }
+
+  &:active{
+    background-color: #7ba980;
+  }
+}

@@ -1,0 +1,27 @@
+app:
+  default:
+    user:
+      login: admin
+      password: admin
+      role: ADMIN
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5434/patient-records?useUnicode=true&charSet=UTF8
+    username: admin
+    password: admin
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    format:
+      date-time: iso
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+  flyway:
+    enabled: true
+logging:
+  level:
+    org.springframework.web: INFO
+    org.hibernate: ERROR
+    com.patient.records: DEBUG

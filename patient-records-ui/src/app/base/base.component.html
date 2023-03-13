@@ -1,0 +1,81 @@
+<div class="base">
+  <div class="management">
+    <div class="management__buttons">
+      <ng-template [ngIf]="activeUser.role.title === 'ADMIN'">
+        <button (click)="doSwitch()">Показать {{ switcher ? "врачей" : "пользователей"}}</button>
+      </ng-template>
+      <button (click)="doCreate()" *ngIf="activeUser.role.title === 'ADMIN' || activeUser.role.title === 'LOCAL_ADMIN'">
+        Добавить {{activeUser.role.title === 'ADMIN' ? !switcher ? "врачей" : "пользователей" : "пациента"}}
+      </button>
+      <button class="open-popup" *ngIf="activeUser.role.title === 'ADMIN'" (click)="adminModeSwitcher()">
+        {{adminChangeMode ? "Отменить" : "Изменить пароль"}}
+      </button>
+      <button (click)="logout()">Выйти</button>
+    </div>
+  </div>
+  <div class="table_block">
+    <div class="table_block__brow">
+      <h3>Фильтрация:</h3>
+      <form #form="ngForm" (ngSubmit)="setFilters(form)">
+        <ng-template [ngIf]="activeUser.role.title === 'ADMIN'">
+          <label for="loginForm">Логин</label>
+          <input type="text" id="loginForm" name="loginForm" ngModel #loginForm="ngModel">
+        </ng-template>
+        <ng-template [ngIf]="activeUser.role.title === 'ADMIN' && !switcher || activeUser.role.title !== 'ADMIN'">
+          <label for="fioForm">ФИО</label>
+          <input type="text" id="fioForm" name="fioForm" ngModel #fioForm="ngModel">
+        </ng-template>
+        <ng-template [ngIf]="activeUser.role.title !== 'ADMIN'">
+          <label for="ageForm">Возраст</label>
+          <input type="number" min="0" id="ageForm" name="ageForm" ngModel #ageForm="ngModel">
+
+          <div class="table_block__brow__dates">
+            <div class="date">
+              <h4>Дата рождения</h4>
+              <label for="minBirthdayForm">От</label>
+              <input type="datetime-local" id="minBirthdayForm" name="minBirthdayForm" ngModel #minBirthdayForm="ngModel">
+              <label for="minBirthdayForm">до</label>
+              <input type="datetime-local" id="maxBirthdayForm" name="maxBirthdayForm" ngModel #maxBirthdayForm="ngModel">
+            </div>
+            <div class="date">
+              <h4>Дата регистрации</h4>
+              <label for="minCreationForm">От</label>
+              <input type="datetime-local" id="minCreationForm" name="minCreationForm" ngModel #minCreationForm="ngModel">
+              <label for="maxCreationForm">до</label>
+              <input type="datetime-local" id="maxCreationForm" name="maxCreationForm" ngModel #maxCreationForm="ngModel">
+            </div>
+          </div>
+        </ng-template>
+        <button>Применить</button>
+      </form>
+    </div>
+
+    <div class="table_block__table">
+      <ng-template [ngIf]="activeUser.role.title === 'ADMIN'">
+        <app-user-base *ngIf="switcher" [login]="login"></app-user-base>
+        <app-doctor-base *ngIf="!switcher" [fio]="fio" [login]="login"></app-doctor-base>
+      </ng-template>
+      <ng-template [ngIf]="activeUser.role.title !== 'ADMIN'">
+        <app-patient-base [fio]="fio" [age]="age" [minBirthday]="minBirthday" [maxBirthday]="maxBirthday"
+                          [minCreation]="minCreation" [maxCreation]="maxCreation">
+        </app-patient-base>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<div class="popup__bg">
+  <div class="popUp">
+    <div class="pop__block">
+      <h3>Изменение пароля:</h3>
+      <form #changeAdminForm="ngForm" (ngSubmit)="changeAdmin(changeAdminForm)">
+        <label for="oldPassword">Старый пароль</label>
+        <input type="password" name="oldPassword" id="oldPassword" ngModel #oldPassword="ngModel">
+        <label for="newPassword">Новый пароль</label>
+        <input type="password" name="newPassword" id="newPassword"  ngModel #newPassword="ngModel">
+        <button class="pop__button">Изменить</button>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,52 @@
+.base {
+  display: flex;
+  flex-direction: row;
+}
+
+.management {
+  width: 300px;
+  height: 100vh;
+  background: url(../../assets/images/green-background.jpg) no-repeat;
+  background-size: cover;
+}
+.management__buttons {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 10px;
+}
+
+.entity {
+  margin-top: 20px;
+  margin-right: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.entity__info {
+  width: 75%;
+  border: 2px solid;
+  border-radius: 5px;
+  background-color: #96d2a2;
+}
+.entity__edit {
+  margin-top: 40px;
+  width: 75%;
+  border: 2px solid;
+  border-radius: 5px;
+}
+.entity__edit form {
+  margin: 15px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.entity__edit form button, .entity__edit form input {
+  border: 1px solid;
+}
+
+h3 {
+  margin: 0;
+}
+
+/*# sourceMappingURL=profile.component.css.map */
